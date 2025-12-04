@@ -761,20 +761,20 @@
   "sourceMap": "60:141:1:-:0;;;;;;;;;;;;;;;;;;;",
   "deployedSourceMap": "60:141:1:-:0;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;92:21;;;:::i;:::-;;;;;;;:::i;:::-;;;;;;;;122:76;;;;;;;;;;;;;:::i;:::-;;:::i;:::-;;92:21;;;;;;;;;;;;:::o;122:76::-;183:7;174:6;;:16;;;;;;;;;;;;;;;;;;122:76;:::o;7:118:2:-;44:7;84:34;77:5;73:46;62:57;;7:118;;;:::o;131:::-;218:24;236:5;218:24;:::i;:::-;213:3;206:37;131:118;;:::o;255:222::-;348:4;386:2;375:9;371:18;363:26;;399:71;467:1;456:9;452:17;443:6;399:71;:::i;:::-;255:222;;;;:::o;564:117::-;673:1;670;663:12;810:122;883:24;901:5;883:24;:::i;:::-;876:5;873:35;863:63;;922:1;919;912:12;863:63;810:122;:::o;938:139::-;984:5;1022:6;1009:20;1000:29;;1038:33;1065:5;1038:33;:::i;:::-;938:139;;;;:::o;1083:329::-;1142:6;1191:2;1179:9;1170:7;1166:23;1162:32;1159:119;;;1197:79;;:::i;:::-;1159:119;1317:1;1342:53;1387:7;1378:6;1367:9;1363:22;1342:53;:::i;:::-;1332:63;;1288:117;1083:329;;;;:::o",
   "source": "// SPDX-License-Identifier: MIT\r\npragma solidity 0.8.19;\r\n\r\ncontract ContratoExemplo {\r\n    uint128 public numero;\r\n\r\n    function guardar(uint128 _numero) public {\r\n        numero = _numero;\r\n    }\r\n}\r\n",
-  "sourcePath": "C:\\Users\\USER\\Desktop\\BlockChain\\contracts\\ContratoExemplo.sol",
+  "sourcePath": "C:\\Users\\USER\\Desktop\\Etapa2BlockChain\\AprenzidadoBlockChain\\contracts\\ContratoExemplo.sol",
   "ast": {
     "absolutePath": "project:/contracts/ContratoExemplo.sol",
     "exportedSymbols": {
       "ContratoExemplo": [
-        160
+        265
       ]
     },
-    "id": 161,
+    "id": 266,
     "license": "MIT",
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 147,
+        "id": 252,
         "literals": [
           "solidity",
           "0.8",
@@ -790,9 +790,9 @@
         "contractDependencies": [],
         "contractKind": "contract",
         "fullyImplemented": true,
-        "id": 160,
+        "id": 265,
         "linearizedBaseContracts": [
-          160
+          265
         ],
         "name": "ContratoExemplo",
         "nameLocation": "69:15:1",
@@ -801,12 +801,12 @@
           {
             "constant": false,
             "functionSelector": "91f5de38",
-            "id": 149,
+            "id": 254,
             "mutability": "mutable",
             "name": "numero",
             "nameLocation": "107:6:1",
             "nodeType": "VariableDeclaration",
-            "scope": 160,
+            "scope": 265,
             "src": "92:21:1",
             "stateVariable": true,
             "storageLocation": "default",
@@ -815,7 +815,7 @@
               "typeString": "uint128"
             },
             "typeName": {
-              "id": 148,
+              "id": 253,
               "name": "uint128",
               "nodeType": "ElementaryTypeName",
               "src": "92:7:1",
@@ -828,23 +828,23 @@
           },
           {
             "body": {
-              "id": 158,
+              "id": 263,
               "nodeType": "Block",
               "src": "163:35:1",
               "statements": [
                 {
                   "expression": {
-                    "id": 156,
+                    "id": 261,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
                     "lValueRequested": false,
                     "leftHandSide": {
-                      "id": 154,
+                      "id": 259,
                       "name": "numero",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 149,
+                      "referencedDeclaration": 254,
                       "src": "174:6:1",
                       "typeDescriptions": {
                         "typeIdentifier": "t_uint128",
@@ -854,11 +854,11 @@
                     "nodeType": "Assignment",
                     "operator": "=",
                     "rightHandSide": {
-                      "id": 155,
+                      "id": 260,
                       "name": "_numero",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 151,
+                      "referencedDeclaration": 256,
                       "src": "183:7:1",
                       "typeDescriptions": {
                         "typeIdentifier": "t_uint128",
@@ -871,14 +871,14 @@
                       "typeString": "uint128"
                     }
                   },
-                  "id": 157,
+                  "id": 262,
                   "nodeType": "ExpressionStatement",
                   "src": "174:16:1"
                 }
               ]
             },
             "functionSelector": "ba4b2c3d",
-            "id": 159,
+            "id": 264,
             "implemented": true,
             "kind": "function",
             "modifiers": [],
@@ -886,17 +886,17 @@
             "nameLocation": "131:7:1",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 152,
+              "id": 257,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 151,
+                  "id": 256,
                   "mutability": "mutable",
                   "name": "_numero",
                   "nameLocation": "147:7:1",
                   "nodeType": "VariableDeclaration",
-                  "scope": 159,
+                  "scope": 264,
                   "src": "139:15:1",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -905,7 +905,7 @@
                     "typeString": "uint128"
                   },
                   "typeName": {
-                    "id": 150,
+                    "id": 255,
                     "name": "uint128",
                     "nodeType": "ElementaryTypeName",
                     "src": "139:7:1",
@@ -920,19 +920,19 @@
               "src": "138:17:1"
             },
             "returnParameters": {
-              "id": 153,
+              "id": 258,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "163:0:1"
             },
-            "scope": 160,
+            "scope": 265,
             "src": "122:76:1",
             "stateMutability": "nonpayable",
             "virtual": false,
             "visibility": "public"
           }
         ],
-        "scope": 161,
+        "scope": 266,
         "src": "60:141:1",
         "usedErrors": []
       }
@@ -947,12 +947,12 @@
     "5777": {
       "events": {},
       "links": {},
-      "address": "0xE512d301eF89424c7313F8beCef34Cbe52Eba496",
-      "transactionHash": "0xbef192b895b6d6c8ca6d391d7669c06f06d9ed9f43274703e5af463ac8bd57c9"
+      "address": "0xc492EbB199d39FF70A31b1c9B130162567f7a038",
+      "transactionHash": "0x16119f01c6c2fe124fca05d13a62bebe1a0e242b79455f6f6625aaa5a4f52498"
     }
   },
   "schemaVersion": "3.4.16",
-  "updatedAt": "2025-11-06T02:49:40.680Z",
+  "updatedAt": "2025-12-04T12:47:07.340Z",
   "networkType": "ethereum",
   "devdoc": {
     "kind": "dev",

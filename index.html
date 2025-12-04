@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8" />
+    <title>DApp - Cadastro de Pacientes</title>
+
+    <!-- Web3 -->
+    <script src="https://cdn.jsdelivr.net/npm/web3@1.7.0/dist/web3.min.js"></script>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            width: 480px;
+            margin: 45px auto;
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 0 14px rgba(0,0,0,0.1);
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 25px;
+            color: #333;
+        }
+
+        h3 {
+            margin-top: 30px;
+            color: #555;
+        }
+
+        label {
+            font-weight: bold;
+            color: #444;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin: 6px 0 14px 0;
+            border-radius: 6px;
+            border: 1px solid #bbb;
+            font-size: 14px;
+        }
+
+        button {
+            background: #4A90E2;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 15px;
+            margin-top: 10px;
+        }
+
+        button:hover {
+            background: #357ABD;
+        }
+
+        #lista {
+            margin-top: 15px;
+            padding-left: 15px;
+        }
+
+        .item-paciente {
+            padding: 8px;
+            background: #eee;
+            margin-bottom: 8px;
+            border-radius: 6px;
+        }
+
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+    <h1>Cadastro de Pacientes</h1>
+
+    <h3>Cadastrar</h3>
+
+    <label>Nome</label>
+    <input id="nome">
+
+    <label>Idade</label>
+    <input id="idade" type="number">
+
+    <label>CPF</label>
+    <input id="cpf">
+
+    <label>Endereço</label>
+    <input id="endereco">
+
+    <button onclick="cadastrar()">Cadastrar Paciente</button>
+
+    <h3>Consultar por CPF</h3>
+    <input id="cpfConsulta" placeholder="Digite o CPF">
+    <button onclick="consultar()">Consultar</button>
+
+    <p id="resultado"></p>
+
+    <h3>Listar Todos</h3>
+    <button onclick="listar()">Listar Pacientes</button>
+
+    <ul id="lista"></ul>
+</div>
+
+<script>
+
+async function carregarContrato() {
+    try {
+        console.log("JS iniciado...");
+
+        if (!window.ethereum) {
+            alert("MetaMask não detectado!");
+            return;
+        }
+
+        window.web3 = new Web3(window.ethereum);
+        await ethereum.request({ method: "eth_requestAccounts" });
+
+        const contas = await web3.eth.getAccounts();
+        account = contas[0];
+        console.log("Conta conectada:", account);
+
+        // Buscar automaticamente o contract address do JSON
+        const artefato = await fetch("./build/contracts/CadastroPacientes.json")
+            .then(res => res.json());
+
+        console.log("Artefato carregado:", artefato);
+
+        const redeId = await web3.eth.net.getId();
+        console.log("Network ID:", redeId);
+
+        const endereco = artefato.networks[redeId].address;
+        console.log("Contrato encontrado:", endereco);
+
+        contrato = new web3.eth.Contract(artefato.abi, endereco);
+
+        console.log("Contrato carregado com sucesso!");
+    } 
+    catch (erro) {
+        console.error("Erro ao carregar contrato:", erro);
+        alert("Erro ao carregar contrato. Veja o console.");
+    }
+}
+
+carregarContrato();
+
+function limparCPF(cpf) {
+    return cpf.replace(/\D/g, "");
+}
+
+async function cadastrar() {
+    const nome = document.getElementById("nome").value;
+    const idade = document.getElementById("idade").value;
+    let cpf = limparCPF(document.getElementById("cpf").value);
+    const endereco = document.getElementById("endereco").value;
+
+    try {
+        await contrato.methods
+            .cadastrarPaciente(nome, idade, cpf, endereco)
+            .send({ from: account });
+
+        alert("Paciente cadastrado com sucesso!");
+    } catch (e) {
+        alert("Erro ao cadastrar: " + e.message);
+        console.error(e);
+    }
+}
+
+async function consultar() {
+    let cpf = limparCPF(document.getElementById("cpfConsulta").value);
+
+    try {
+        const dados = await contrato.methods.consultarPaciente(cpf).call();
+
+        document.getElementById("resultado").innerHTML =
+            `<br><b>Nome:</b> ${dados[0]}<br>
+             <b>Idade:</b> ${dados[1]}<br>
+             <b>CPF:</b> ${dados[2]}<br>
+             <b>Endereço:</b> ${dados[3]}<br>`;
+    } catch (e) {
+        alert("Paciente não encontrado!");
+        console.warn(e);
+    }
+}
+
+async function listar() {
+    const total = await contrato.methods.totalPacientes().call();
+    const lista = document.getElementById("lista");
+
+    lista.innerHTML = "";
+
+    for (let i = 0; i < total; i++) {
+        const cpf = await contrato.methods.listaCPFs(i).call();
+        const p = await contrato.methods.consultarPaciente(cpf).call();
+
+        const item = document.createElement("li");
+        item.className = "item-paciente";
+        item.innerHTML = `
+            <b>${p[0]}</b><br>
+            Idade: ${p[1]}<br>
+            CPF: ${p[2]}<br>
+            Endereço: ${p[3]}
+        `;
+
+        lista.appendChild(item);
+    }
+}
+
+</script>
+
+</body>
+</html>
